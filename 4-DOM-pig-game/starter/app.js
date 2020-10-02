@@ -17,7 +17,11 @@ activePlayer = 0;
 
 //dice = Math.floor(Math.random() * 6) + 1;
 
+<<<<<<< HEAD
 //document.querySelector('#current-' + activePlayer).textContent = dice;
+=======
+document.querySelector('#current-' + activePlayer).textContent = dice;
+>>>>>>> be2469f4c387f4f566db39d746cc974439708f66
 //document.querySelector('#current-' + activePlayer).innerHTML = '<em>'+dice+'<\em>';
 
 
