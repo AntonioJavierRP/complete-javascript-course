@@ -9,19 +9,15 @@ GAME RULES:
 
 */
 
+console.log('hello');
+
 var scores, activePlayer;
 
-scores = [0,0];
-roundScore = 0;
-activePlayer = 0;
+init();
 
 //dice = Math.floor(Math.random() * 6) + 1;
 
-<<<<<<< HEAD
 //document.querySelector('#current-' + activePlayer).textContent = dice;
-=======
-document.querySelector('#current-' + activePlayer).textContent = dice;
->>>>>>> be2469f4c387f4f566db39d746cc974439708f66
 //document.querySelector('#current-' + activePlayer).innerHTML = '<em>'+dice+'<\em>';
 
 
@@ -29,13 +25,6 @@ document.querySelector('#current-' + activePlayer).textContent = dice;
 //console.log(x);
 
 
-document.querySelector('.dice').style.display = 'none';
-
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
 
 // Anonimous function when is declared inside, bc it doesnt have a name 
 // and we are not going to reuse it
@@ -113,4 +102,21 @@ function nextPlayer(){
 
 
     document.querySelector('.dice').style.display = 'none';
+}
+
+document.querySelector('.btn-new').addEventListener('click', init);
+
+function init(){
+    scores = [0,0];
+    activePlayer = 0;
+    roundScore = 0;
+
+    
+    document.querySelector('.dice').style.display = 'none';
+
+    document.getElementById('score-0').textContent = '0';
+    document.getElementById('score-1').textContent = '0';
+
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
 }
