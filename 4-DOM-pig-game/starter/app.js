@@ -9,9 +9,8 @@ GAME RULES:
 
 */
 
-console.log('hello');
 
-var scores, activePlayer;
+var scores, activePlayer, roundScore, gamePlaying ;
 
 init();
 
@@ -29,57 +28,60 @@ init();
 // Anonimous function when is declared inside, bc it doesnt have a name 
 // and we are not going to reuse it
 document.querySelector('.btn-roll').addEventListener('click', function(){
-    
-    // 1. Random number.
+    if(gamePlaying){
+        // 1. Random number.
 
-    var dice = Math.floor(Math.random() * 6) + 1;
+        var dice = Math.floor(Math.random() * 6) + 1;
 
-    // 2. Display result.
-    var diceDOM = document.querySelector('.dice');
+        // 2. Display result.
+        var diceDOM = document.querySelector('.dice');
 
-    diceDOM.style.display = 'block';
+        diceDOM.style.display = 'block';
 
-    diceDOM.src = 'dice-' + dice + '.png';
-
-
-
-    // 3. Update the round score IF the rolled number was NOT a 1.
-    if(dice !== 1){
-        // Add Score
-        roundScore += dice;
-        document.querySelector('#current-' + activePlayer).innerHTML = '<em>'+ roundScore +'<\em>';
+        diceDOM.src = 'dice-' + dice + '.png';
 
 
-    }else{
-        // Next player
-        nextPlayer();
+
+        // 3. Update the round score IF the rolled number was NOT a 1.
+        if(dice !== 1){
+            // Add Score
+            roundScore += dice;
+            document.querySelector('#current-' + activePlayer).innerHTML = '<em>'+ roundScore +'<\em>';
+
+
+        }else{
+            // Next player
+            nextPlayer();
+        }
     }
+    
 
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function(){
-    // Add CURRENT score to GLOBAL score of the current player
-    scores[activePlayer] += roundScore;
+    if(gamePlaying){
+        // Add CURRENT score to GLOBAL score of the current player
+        scores[activePlayer] += roundScore;
 
-    // Update de UI
-    document.querySelector('#score-'+ activePlayer).textContent = scores[activePlayer];
-    
-    
+        // Update de UI
+        document.querySelector('#score-'+ activePlayer).textContent = scores[activePlayer];
+        
+        
 
-    // Check if player won the game
-    if(scores[activePlayer] >= 15){
-        document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
-        //alert('player ' + (activePlayer+1) + ' won!');
-        document.querySelector('.dice').style.display = 'none';
-        document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
-        document.querySelector('.player-'+activePlayer+'-panel').classList.remove('active');
+        // Check if player won the game
+        if(scores[activePlayer] >= 100){
+            document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+            //alert('player ' + (activePlayer+1) + ' won!');
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
+            document.querySelector('.player-'+activePlayer+'-panel').classList.remove('active');
+            gamePlaying = false;
 
-
+        }
+        else{
+            nextPlayer();
+        }
     }
-    else{
-        nextPlayer();
-    }
-
 
 });
 
@@ -110,6 +112,7 @@ function init(){
     scores = [0,0];
     activePlayer = 0;
     roundScore = 0;
+    gamePlaying = true;
 
     
     document.querySelector('.dice').style.display = 'none';
@@ -119,4 +122,16 @@ function init(){
 
     document.getElementById('current-0').textContent = '0';
     document.getElementById('current-1').textContent = '0';
+
+    document.getElementById('name-0').textContent = 'Player 1';
+    document.getElementById('name-1').textContent = 'Player 2';
+
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
+
+    document.querySelector('.player-0-panel').classList.remove('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+    document.querySelector('.player-0-panel').classList.add('active');
+
+
 }
