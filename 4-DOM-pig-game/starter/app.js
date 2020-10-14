@@ -10,7 +10,7 @@ GAME RULES:
 */
 
 
-var scores, activePlayer, roundScore, gamePlaying, six_rolled ;
+var scores, activePlayer, roundScore, gamePlaying, six_rolled, maxScore ;
 
 init();
 
@@ -78,7 +78,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
         
 
         // Check if player won the game
-        if(scores[activePlayer] >= 100){
+        if(scores[activePlayer] >= maxScore){
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
             //alert('player ' + (activePlayer+1) + ' won!');
             document.querySelector('.dice').style.display = 'none';
@@ -124,6 +124,7 @@ function init(){
     roundScore = 0;
     gamePlaying = true;
     six_rolled = false;
+    maxScore = 100;
 
     
     document.querySelector('.dice').style.display = 'none';
@@ -147,6 +148,10 @@ function init(){
 
 }
 
+document.querySelector('.max-score-input').addEventListener('change', function(){
+    console.log(document.querySelector('.max-score-input').value);
+    maxScore = document.querySelector('.max-score-input').value;
+});
 /*
 YOUR 3 CHALLENGES
 Change the game to follow these rules:
@@ -159,3 +164,4 @@ Change the game to follow these rules:
 
 // Challenge 1. Completed. (Not corrected)
 
+// Challenge 2. Completed. (Not corrected)
